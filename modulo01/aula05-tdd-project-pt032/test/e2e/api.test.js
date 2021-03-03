@@ -93,7 +93,8 @@ describe('API Tests Suite', () => {
       ).resolves(car)
 
       const expected = {
-        result: app.instance.carService.currencyFormat.format(244.40)
+        // Intl.NumberFormar.format() uses ascii 160 instead of space
+        result: 'R$\xa0244,40'
       }
 
       const response = await request(app.server)

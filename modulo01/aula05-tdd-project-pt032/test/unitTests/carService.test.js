@@ -86,7 +86,8 @@ describe('CarService Tests Suite', () => {
     sandbox.stub(carService, "taxesBasedOnAge")
       .get(() => [{ from: 40, to: 50, then: 1.3 }])
 
-    const expected = carService.currencyFormat.format(244.40)
+    // Intl.NumberFormar.format() uses ascii 160 instead of space
+    const expected = 'R$\xa0244,40'
     const result = await carService.calculateFinalPrice(customer, carCategory, numberOfDays)
 
     expect(result).to.be.deep.equal(expected)
